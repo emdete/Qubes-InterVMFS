@@ -7,7 +7,7 @@ from base64 import encodestring as encode_base64
 from logging import getLogger, StreamHandler, Formatter, DEBUG, INFO
 from errno import EPERM, EBADMSG
 from faulthandler import enable as enablefaulthandler
-from os.path import join as pathjoin
+from os.path import join as pathjoin, expanduser
 
 enablefaulthandler()
 log = getLogger(__name__)
@@ -129,7 +129,8 @@ def init_logging(debug):
 		root_logger.setLevel(INFO)
 	root_logger.addHandler(handler)
 
-def main(mountpoint, debug=True):
+def main(mountpoint='~', debug=True):
+	mountpoint = expanduser(mountpoint)
 	init_logging(debug)
 	daemon = VmReadFSd(mountpoint)
 	line = stdin.readline()

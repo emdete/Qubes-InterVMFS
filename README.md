@@ -31,7 +31,8 @@ Running
 
 Create a directory.
 
-Run usr/bin/QubesInterVMFS.py with that directory name as first argument.
+Run usr/bin/QubesInterVMFS.py with the targetvm as first and that directory
+name as second argument.
 
 The home directory of the target vm should be readonly accessible in the
 directory.

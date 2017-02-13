@@ -7,9 +7,12 @@ all:
 
 run:
 	mkdir -p mnt
-	python3 -u usr/bin/QubesInterVMFS.py "`pwd`/mnt" 1
+	python3 -u usr/bin/QubesInterVMFS.py targetvm "`pwd`/mnt" 1
 	fusermount -u mnt
 
 dbg:
 	python3 -u usr/bin/QubesInterVMFSd.py "/tmp"
+
+tgz:
+	tar cvzf qubes-intervmfs_0.0_all.tgz etc usr
 

@@ -16,11 +16,11 @@ else:
 log = getLogger(__name__)
 
 class VmReadFS(Operations):
-	def __init__(self, debug):
+	def __init__(self, targetvm, debug):
 		super(VmReadFS, self).__init__()
 		self.daemon = Popen(
-			['python3', 'usr/bin/QubesInterVMFSd.py', '/tmp', ] if debug else
-			['qrexec-client-vm', 'personal', 'qubes.QubesInterVMFS', ]
+			['python3', 'usr/bin/QubesInterVMFSd.py', ] if debug else
+			['qrexec-client-vm', targetvm, 'qubes.QubesInterVMFS', ]
 			, stdout=PIPE, stdin=PIPE, )
 
 	def _send_receive(self, msg):
@@ -106,10 +106,10 @@ def init_logging(debug=False):
 		root_logger.setLevel(INFO)
 	root_logger.addHandler(handler)
 
-def main(mountpoint, debug=0):
+def main(targetvm, mountpoint, debug=0):
 	debug = int(debug)
 	init_logging(debug)
-	testfs = VmReadFS(debug)
+	testfs = VmReadFS(targetvm, debug)
 	fuse_options = set(default_options)
 	fuse_options.add('fsname=qubes.QubesInterVMFS')
 	if debug:
