@@ -13,14 +13,14 @@ dom0:
 
 	etc/qubes-rpc/qubes.QubesInterVMFS
 
-targetvm:
+destvm:
 
 	usr/bin/QubesInterVMFSd.py
 	etc/qubes-rpc/qubes.QubesInterVMFS
 
 	dependency: python3
 
-sourcevm:
+srcvm:
 
 	usr/bin/QubesInterVMFS.py
 
@@ -33,7 +33,8 @@ Create a directory.
 
 Run usr/bin/QubesInterVMFS.py with that directory name as first argument.
 
-The home directory of the target vm should be visible in the directory.
+The home directory of the target vm should be readonly accessible in the
+directory.
 
 Debugging
 ---------
@@ -45,4 +46,17 @@ will switch on debugging.
 
 On qubes you should see logging in /var/log/qubes/targetvm..., the daemon part
 is logging all requests on stderr, the client part is quiet.
+
+Todos
+-----
+
+- configurable shared directory
+
+- anonymise the inodes (currently the original inodes are seen in the client)
+
+- hide files that can't be read anyway
+
+- source code review
+
+- native server
 
