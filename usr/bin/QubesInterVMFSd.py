@@ -127,7 +127,7 @@ def init_logging(debug):
 		root_logger.setLevel(INFO)
 	root_logger.addHandler(handler)
 
-def main(mountpoint='~', debug=True):
+def main(mountpoint='~', debug=False):
 	mountpoint = expanduser(mountpoint)
 	init_logging(debug)
 	daemon = VmReadFSd(mountpoint)
@@ -135,6 +135,7 @@ def main(mountpoint='~', debug=True):
 	while line:
 		log.debug("in %s", line)
 		try:
+			line = line.strip()
 			line = decode_json(line)
 			for method, parameters in line.items():
 				if method in set(('flush', 'getattr', 'open', 'opendir', 'readdir', 'release', 'releasedir', 'read', 'lookup', )):
