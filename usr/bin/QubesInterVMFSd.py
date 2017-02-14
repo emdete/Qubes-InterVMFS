@@ -104,8 +104,6 @@ class VmReadFSd(object):
 		return fh
 
 	def read(self, fh, off, size):
-		if size > 2048:
-			size = 2048
 		f = self.openfiles[fh].file
 		f.seek(off)
 		return str(encode_base64(f.read(size)).strip(), 'ascii')
