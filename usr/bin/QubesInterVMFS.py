@@ -56,6 +56,9 @@ class VmReadFS(Operations):
 		assert not attr, attr
 		return entry
 
+	def debug(self, debug):
+		return self._send_receive(dict(debug=(debug, )))
+
 	def opendir(self, inode, ctx):
 		msg = self._send_receive(dict(opendir=(inode, dict(pid=ctx.pid, uid=ctx.uid, gid=ctx.gid, umask=ctx.umask, isroot=inode==ROOT_INODE, ))))
 		return msg
@@ -110,6 +113,7 @@ def main(targetvm, mountpoint, debug=0):
 	debug = int(debug)
 	init_logging(debug)
 	testfs = VmReadFS(targetvm, debug)
+	testfs.debug(debug)
 	fuse_options = set(default_options)
 	fuse_options.add('fsname=qubes.QubesInterVMFS')
 	if debug:

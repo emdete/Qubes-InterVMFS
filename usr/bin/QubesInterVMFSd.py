@@ -118,8 +118,14 @@ class VmReadFSd(object):
 	def release(self, fh):
 		return
 
+	def debug(self, debug):
+		if debug:
+			handler.setLevel(DEBUG)
+			root_logger.setLevel(DEBUG)
+		return debug
 
 def init_logging(debug):
+	global handler, root_logger
 	handler = StreamHandler(stderr)
 	handler.setFormatter(Formatter('%(asctime)s.%(msecs)03d %(threadName)s: [%(name)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S'))
 	root_logger = getLogger()
@@ -137,12 +143,11 @@ def main(mountpoint='~', debug=False):
 	daemon = VmReadFSd(mountpoint)
 	line = stdin.readline()
 	while line:
-		log.debug("in %s", line)
+		log.debug("in %s", line.strip())
 		try:
-			line = line.strip()
 			line = decode_json(line)
 			for method, parameters in line.items():
-				if method in set(('flush', 'getattr', 'open', 'opendir', 'readdir', 'release', 'releasedir', 'read', 'lookup', )):
+				if method in set(('flush', 'getattr', 'open', 'opendir', 'readdir', 'release', 'releasedir', 'read', 'lookup', 'debug', )):
 					method = getattr(daemon, method)
 					line = method(*parameters)
 					line = encode_json(dict(result=line))
