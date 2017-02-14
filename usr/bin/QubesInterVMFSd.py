@@ -68,8 +68,12 @@ class VmReadFSd(object):
 
 	def lookup(self, parent_inode, name, ctx):
 		if ctx['isroot']:
+			if not self._readable(self.root, name):
+				raise OSError(EPERM, 'permission denied')
 			name = pathjoin(self.root, name)
 		else:
+			if not self._readable(self.inodes[parent_inode].name, name):
+				raise OSError(EPERM, 'permission denied')
 			name = pathjoin(self.inodes[parent_inode].name, name)
 		return self._getattr(name)
 
