@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from sys import stdin, stderr, stdout
 from json import dumps as encode_json, loads as decode_json
-from os import listdir, stat, O_RDWR, O_WRONLY
+from os import listdir, stat, O_RDWR, O_WRONLY, access, R_OK
 from random import randint
 from base64 import encodestring as encode_base64
 from logging import getLogger, StreamHandler, Formatter, DEBUG, INFO
@@ -58,7 +58,7 @@ class VmReadFSd(object):
 		return s
 
 	def _readable(self, dirname, name):
-		return True
+		return name[0] != '.' and access(pathjoin(dirname, name), R_OK)
 
 	def getattr(self, inode, ctx):
 		if ctx['isroot'] and inode not in self.inodes:
@@ -87,7 +87,7 @@ class VmReadFSd(object):
 		d = self.opendirs[fh]
 		return [(name, self._getattr(pathjoin(d.name, name)), off+index+1)
 			for index, name, in enumerate(d.listdir[off:])
-			if name[0] != '.' and self._readable(d.name, name)
+			if self._readable(d.name, name)
 			]
 
 	def releasedir(self, fh):
