@@ -116,6 +116,8 @@ class VmReadFSd(object):
 		return
 
 	def release(self, fh):
+		self.openfiles[fh].file.close()
+		del self.openfiles[fh]
 		return
 
 	def debug(self, debug):
