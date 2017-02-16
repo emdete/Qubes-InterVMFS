@@ -4,7 +4,11 @@ from sys import stderr
 from subprocess import Popen, PIPE, STDOUT
 from base64 import decodestring as decode_base64
 from logging import getLogger, StreamHandler, Formatter, DEBUG, INFO
-from llfuse import Operations, FUSEError, EntryAttributes, ROOT_INODE, default_options, main as fuse_main, init as fuse_init, close as fuse_close
+from llfuse import Operations, FUSEError, EntryAttributes, ROOT_INODE, main as fuse_main, init as fuse_init, close as fuse_close
+try:
+	from llfuse import default_options
+except ImportError:
+	default_options = frozenset({'default_permissions', 'no_splice_read', 'big_writes', 'splice_move', 'nonempty', 'splice_write'})
 
 try:
 	import faulthandler
