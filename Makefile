@@ -3,6 +3,8 @@
 # see file:///usr/share/doc/python-llfuse-doc/html/index.html
 # see https://www.qubes-os.org/doc/qrexec2/
 #
+.PHONY: all run dbg tgz debian
+
 all:
 
 run:
@@ -15,4 +17,10 @@ dbg:
 
 tgz:
 	tar cvzf qubes-intervmfs_0.0_all.tgz etc usr
+
+debian:
+	git checkout debian
+	git rebase master
+	make -f debian/Makefile
+	git checkout master
 
