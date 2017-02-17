@@ -5,10 +5,6 @@ from subprocess import Popen, PIPE, STDOUT
 from base64 import decodestring as decode_base64
 from logging import getLogger, StreamHandler, Formatter, DEBUG, INFO
 from llfuse import Operations, FUSEError, EntryAttributes, ROOT_INODE, main as fuse_main, init as fuse_init, close as fuse_close
-try:
-	from llfuse import default_options
-except ImportError:
-	default_options = ('default_permissions', 'no_splice_read', 'big_writes', 'splice_move', 'nonempty', 'splice_write', )
 
 try:
 	import faulthandler
@@ -118,8 +114,13 @@ def main(targetvm, mountpoint, debug=0):
 	init_logging(debug)
 	testfs = VmReadFS(targetvm, debug)
 	testfs.debug(debug)
-	fuse_options = set(default_options)
-	fuse_options.add('fsname=qubes.QubesInterVMFS')
+	try:
+		from llfuse import default_options
+		fuse_options = set(default_options)
+		fuse_options.add('fsname=qubes.QubesInterVMFS')
+	except ImportError: # older llfuse:
+		fuse_options = ('default_permissions', 'no_splice_read', 'big_writes', 'splice_move',
+			'nonempty', 'splice_write', 'fsname=qubes.QubesInterVMFS', )
 	if debug:
 		fuse_options.add('debug')
 	fuse_init(testfs, mountpoint, fuse_options)
