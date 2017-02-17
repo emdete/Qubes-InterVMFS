@@ -8,7 +8,7 @@ from llfuse import Operations, FUSEError, EntryAttributes, ROOT_INODE, main as f
 try:
 	from llfuse import default_options
 except ImportError:
-	default_options = frozenset({'default_permissions', 'no_splice_read', 'big_writes', 'splice_move', 'nonempty', 'splice_write'})
+	default_options = ('default_permissions', 'no_splice_read', 'big_writes', 'splice_move', 'nonempty', 'splice_write', )
 
 try:
 	import faulthandler
