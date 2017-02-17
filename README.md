@@ -9,6 +9,8 @@ or whatever as a tool for qubes is expected! Try it on your own risk.
 Installation
 ------------
 
+the following files are required in the given places:
+
 dom0:
 
 	etc/qubes-rpc/qubes.QubesInterVMFS
@@ -25,6 +27,9 @@ srcvm:
 	usr/bin/QubesInterVMFS.py
 
 	dependency: python3, python3-llfuser
+
+the makefile is able to create a tgz and contains a brute force method to
+compile a debian package for easier installation and deinstallation.
 
 Running
 -------
