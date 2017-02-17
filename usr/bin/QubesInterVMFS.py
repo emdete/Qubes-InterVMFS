@@ -32,8 +32,11 @@ class VmReadFS(Operations):
 		return msg['result']
 
 	def _attr2entry(self, attr):
-		log.info("%s", attr)
 		entry = EntryAttributes()
+		entry.generation = 0
+		entry.entry_timeout = 0
+		entry.attr_timeout = 0
+		entry.st_rdev = 0
 		for k in (
 			#'attr_timeout',
 			#'entry_timeout',
@@ -54,6 +57,7 @@ class VmReadFS(Operations):
 			):
 			v = attr.pop(k)
 			setattr(entry, k, v)
+		assert not attr, attr
 		return entry
 
 	def debug(self, debug):
