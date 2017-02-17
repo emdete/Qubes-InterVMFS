@@ -52,8 +52,6 @@ Todos
 
 - anonymise the inodes (currently the original inodes are seen in the client)
 
-- hide files that can't be read anyway
-
 - source code review
 
 - native server
