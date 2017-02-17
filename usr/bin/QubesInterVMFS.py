@@ -59,8 +59,10 @@ class VmReadFS(Operations):
 	def debug(self, debug):
 		return self._send_receive(dict(debug=(debug, )))
 
-	def opendir(self, inode, ctx):
-		msg = self._send_receive(dict(opendir=(inode, dict(pid=ctx.pid, uid=ctx.uid, gid=ctx.gid, umask=ctx.umask, isroot=inode==ROOT_INODE, ))))
+	def opendir(self, inode, ctx=None):
+		msg = self._send_receive(dict(opendir=(inode, dict(
+			#pid=ctx.pid, uid=ctx.uid, gid=ctx.gid, umask=ctx.umask,
+			isroot=inode==ROOT_INODE, ))))
 		return msg
 
 	def readdir(self, fh, off):
@@ -72,16 +74,22 @@ class VmReadFS(Operations):
 		msg = self._send_receive(dict(releasedir=(inode, )))
 		return msg
 
-	def getattr(self, inode, ctx):
-		msg = self._send_receive(dict(getattr=(inode, dict(pid=ctx.pid, uid=ctx.uid, gid=ctx.gid, umask=ctx.umask, isroot=inode==ROOT_INODE, ), )))
+	def getattr(self, inode, ctx=None):
+		msg = self._send_receive(dict(getattr=(inode, dict(
+			#pid=ctx.pid, uid=ctx.uid, gid=ctx.gid, umask=ctx.umask,
+			isroot=inode==ROOT_INODE, ), )))
 		return self._attr2entry(msg)
 
-	def lookup(self, parent_inode, name, ctx):
-		msg = self._send_receive(dict(lookup=(parent_inode, str(name, 'utf-8'), dict(pid=ctx.pid, uid=ctx.uid, gid=ctx.gid, umask=ctx.umask, isroot=parent_inode==ROOT_INODE, ))))
+	def lookup(self, parent_inode, name, ctx=None):
+		msg = self._send_receive(dict(lookup=(parent_inode, str(name, 'utf-8'), dict(
+			#pid=ctx.pid, uid=ctx.uid, gid=ctx.gid, umask=ctx.umask,
+			isroot=parent_inode==ROOT_INODE, ))))
 		return self._attr2entry(msg)
 
-	def open(self, inode, flags, ctx):
-		msg = self._send_receive(dict(open=(inode, flags, dict(pid=ctx.pid, uid=ctx.uid, gid=ctx.gid, umask=ctx.umask, isroot=inode==ROOT_INODE, ))))
+	def open(self, inode, flags, ctx=None):
+		msg = self._send_receive(dict(open=(inode, flags, dict(
+			#pid=ctx.pid, uid=ctx.uid, gid=ctx.gid, umask=ctx.umask,
+			isroot=inode==ROOT_INODE, ))))
 		return msg
 
 	def read(self, fh, off, size):
