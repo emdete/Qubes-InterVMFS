@@ -58,7 +58,6 @@ class VmReadFS(Operations):
 			v = attr.pop(k)
 			setattr(entry, k, v)
 		assert not attr, attr
-		log.info("%s", entry)
 		return entry
 
 	def debug(self, debug):
