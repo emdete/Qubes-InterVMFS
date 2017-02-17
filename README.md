@@ -26,7 +26,7 @@ srcvm:
 
 	usr/bin/QubesInterVMFS.py
 
-	dependency: python3, python3-llfuser
+	dependency: python3, python3-llfuser 1.2+dfsg-1
 
 the makefile is able to create a tgz and contains a brute force method to
 compile a debian package for easier installation and deinstallation.
