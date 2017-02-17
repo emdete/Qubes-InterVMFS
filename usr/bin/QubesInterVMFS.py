@@ -51,7 +51,7 @@ class VmReadFS(Operations):
 			'st_size',
 			'st_uid',
 			):
-			v = attr.pop(k)
+			v = int(attr.pop(k))
 			setattr(entry, k, v)
 		assert not attr, attr
 		return entry
