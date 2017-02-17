@@ -6,6 +6,8 @@
 .PHONY: all run dbg tgz debian
 
 all:
+	mkdir -p mnt
+	python3 -u usr/bin/QubesInterVMFS.py debian-9 "`pwd`/mnt"
 
 run:
 	mkdir -p mnt
@@ -13,7 +15,7 @@ run:
 	fusermount -u mnt
 
 dbg:
-	python3 -u usr/bin/QubesInterVMFSd.py "/tmp"
+	qvm-copy-to-vm debian-9 qubes-intervmfs_0.0_all.deb
 
 tgz:
 	tar cvzf qubes-intervmfs_0.0_all.tgz etc usr

@@ -1,4 +1,4 @@
-QubesInterVMFS
+Qubes-InterVMFS
 ==============
 
 A filesystem for interchanging files between virtual machines under qubes.
@@ -43,10 +43,7 @@ Debugging
 The two parts are communicating via qrexec-client-vm (see
 https://www.qubes-os.org/doc/qrexec2/) but can run standalone (directly using
 stdin/out) for debugging purpose. if you add a non-zero second parameter it
-will switch on debugging.
-
-On qubes you should see logging in /var/log/qubes/targetvm..., the daemon part
-is logging all requests on stderr, the client part is quiet.
+will switch on debugging and run locally.
 
 Todos
 -----
