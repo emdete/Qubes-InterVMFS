@@ -36,11 +36,11 @@ Running
 
 Create a directory.
 
-Run usr/bin/QubesInterVMFS.py with the targetvm as first and that directory
-name as second argument.
+Run usr/bin/QubesInterVMFS.py in the srcvm with the destvm as first and that
+directory name as second argument.
 
-The home directory of the target vm should be readonly accessible in the
-directory.
+The home directory of the destvm should be readonly accessible in the
+directory in the srcvm.
 
 Debugging
 ---------
