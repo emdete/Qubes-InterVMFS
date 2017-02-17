@@ -118,14 +118,16 @@ def main(targetvm, mountpoint, debug=0):
 		from llfuse import default_options
 		fuse_options = set(default_options)
 		fuse_options.add('fsname=qubes.QubesInterVMFS')
+		arguments = dict(workers=1)
 	except ImportError: # older llfuse:
 		fuse_options = list(['default_permissions', 'no_splice_read', 'big_writes', 'splice_move',
 			'nonempty', 'splice_write', 'fsname=qubes.QubesInterVMFS', ])
+		arguments = dict()
 	if debug:
 		fuse_options.add('debug')
 	fuse_init(testfs, mountpoint, fuse_options)
 	try:
-		fuse_main(workers=1)
+		fuse_main(**arguments)
 	finally:
 		fuse_close()
 
