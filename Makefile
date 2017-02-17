@@ -15,7 +15,7 @@ run:
 	fusermount -u mnt
 
 dbg:
-	qvm-copy-to-vm debian-9 qubes-intervmfs_0.0_all.deb
+	qvm-copy-to-vm personal qubes-intervmfs_0.0_all.deb
 
 tgz:
 	tar cvzf qubes-intervmfs_0.0_all.tgz etc usr
