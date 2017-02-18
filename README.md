@@ -2,9 +2,15 @@ Qubes-InterVMFS
 ==============
 
 A filesystem for interchanging files between virtual machines under qubes.
+Current situation is that you just can copy or move a single file from one VM
+to another.  If you need access to a whole bunch of files you are lost (or
+create a tgz first). Sometimes you don't want even to copy the content. I was
+always missing a solution to export a directory tree read only to another VM.
+This project solves exactly that.
 
 This is a proof on concept and not considered as stable, final, mature, secure
-or whatever as a tool for qubes is expected! Try it on your own risk.
+or whatever as a tool for qubes is expected and should be! Try it on your own
+risk.
 
 Installation
 ------------
@@ -15,6 +21,12 @@ dom0:
 
 	etc/qubes-rpc/qubes.QubesInterVMFS
 
+srcvm:
+
+	usr/bin/QubesInterVMFS.py
+
+	dependency: python3, python3-llfuser 1.2+dfsg-1
+
 destvm:
 
 	usr/bin/QubesInterVMFSd.py
@@ -22,13 +34,7 @@ destvm:
 
 	dependency: python3
 
-srcvm:
-
-	usr/bin/QubesInterVMFS.py
-
-	dependency: python3, python3-llfuser 1.2+dfsg-1
-
-the makefile is able to create a tgz and contains a brute force method to
+the Makefile is able to create a tgz and contains a brute force method to
 compile a debian package for easier installation and deinstallation.
 
 Running
@@ -39,7 +45,7 @@ Create a directory.
 Run usr/bin/QubesInterVMFS.py in the srcvm with the destvm as first and that
 directory name as second argument.
 
-The home directory of the destvm should be readonly accessible in the
+The home directory of the destvm should be readonly accessible in the given
 directory in the srcvm.
 
 Debugging
