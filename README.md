@@ -4,7 +4,7 @@ Qubes-InterVMFS
 A filesystem for interchanging files between virtual machines under qubes.
 Current situation is that you just can copy or move a single file from one VM
 to another.  If you need access to a whole bunch of files you are lost (or
-create a tgz first). Sometimes you don't want even to copy the content. I was
+create a tgz first). Sometimes you don't even want to copy the content. I was
 always missing a solution to export a directory tree read only to another VM.
 This project solves exactly that.
 
