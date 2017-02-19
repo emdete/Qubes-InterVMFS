@@ -60,9 +60,10 @@ class VmReadFS(Operations):
 			v = attr.pop(k)
 			setattr(entry, k, v)
 		assert not attr, attr
-		entry.st_atime = entry.st_atime_ns / 1000000
-		entry.st_ctime = entry.st_ctime_ns / 1000000
-		entry.st_mtime = entry.st_mtime_ns / 1000000
+		if hasattr(entry, "st_atime"):
+			entry.st_atime = entry.st_atime_ns / 1000000000
+			entry.st_ctime = entry.st_ctime_ns / 1000000000
+			entry.st_mtime = entry.st_mtime_ns / 1000000000
 		return entry
 
 	def debug(self, debug):
