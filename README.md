@@ -15,7 +15,7 @@ risk.
 Installation
 ------------
 
-the following files are required in the given places:
+The following files are required in the given places:
 
 dom0:
 
@@ -23,18 +23,18 @@ dom0:
 
 srcvm:
 
-	usr/bin/QubesInterVMFS.py
+	usr/bin/QubesInterVMFS
 
 	dependency: python3, python3-llfuser 1.2+dfsg-1
 
 destvm:
 
-	usr/bin/QubesInterVMFSd.py
+	usr/lib/qubes-intervmfs/QubesInterVMFSd.py
 	etc/qubes-rpc/qubes.QubesInterVMFS
 
 	dependency: python3
 
-the Makefile is able to create a tgz and contains a brute force method to
+The Makefile is able to create a tgz and contains a brute force method to
 compile a debian package for easier installation and deinstallation.
 
 Running
@@ -42,7 +42,7 @@ Running
 
 Create a directory.
 
-Run usr/bin/QubesInterVMFS.py in the srcvm with the destvm as first and that
+Run usr/bin/QubesInterVMFS in the srcvm with the destvm as first and that
 directory name as second argument.
 
 The home directory of the destvm should be readonly accessible in the given
@@ -59,11 +59,11 @@ will switch on debugging and run locally.
 Todos
 -----
 
-- configurable shared directory
+- Configurable shared directory
 
-- anonymise the inodes (currently the original inodes are seen in the client)
+- Anonymise the inodes (currently the original inodes are seen in the client)
 
-- source code review
+- Source code review
 
-- native server
+- Native server in destvm
 

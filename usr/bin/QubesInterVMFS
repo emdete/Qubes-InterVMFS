@@ -19,7 +19,7 @@ class VmReadFS(Operations):
 	def __init__(self, targetvm, debug):
 		super(VmReadFS, self).__init__()
 		self.daemon = Popen(
-			['python3', 'usr/bin/QubesInterVMFSd.py', ] if debug else
+			['python3', 'usr/lib/qubes-intervmfs/QubesInterVMFSd.py', ] if debug else
 			['qrexec-client-vm', targetvm, 'qubes.QubesInterVMFS', ]
 			, stdout=PIPE, stdin=PIPE, )
 
@@ -34,9 +34,11 @@ class VmReadFS(Operations):
 	def _attr2entry(self, attr):
 		entry = EntryAttributes()
 		entry.generation = 0
-		entry.entry_timeout = 0
-		entry.attr_timeout = 0
+		entry.entry_timeout = 5
+		entry.attr_timeout = 5
 		entry.st_rdev = 0
+		entry.st_blksize = 512
+		entry.st_blocks = 1
 		for k in (
 			#'attr_timeout',
 			#'entry_timeout',
@@ -58,6 +60,9 @@ class VmReadFS(Operations):
 			v = attr.pop(k)
 			setattr(entry, k, v)
 		assert not attr, attr
+		entry.st_atime = entry.st_atime_ns / 1000000
+		entry.st_ctime = entry.st_ctime_ns / 1000000
+		entry.st_mtime = entry.st_mtime_ns / 1000000
 		return entry
 
 	def debug(self, debug):

@@ -1,1 +1,1 @@
-exec /usr/bin/QubesInterVMFSd.py
+exec /usr/lib/qubes-intervmfs/QubesInterVMFSd.py

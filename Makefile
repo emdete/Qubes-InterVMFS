@@ -7,11 +7,11 @@
 
 all:
 	mkdir -p mnt
-	python3 -u usr/bin/QubesInterVMFS.py debian-9 "`pwd`/mnt"
+	python3 -u usr/bin/QubesInterVMFS debian-9 "`pwd`/mnt"
 
 run:
 	mkdir -p mnt
-	python3 -u usr/bin/QubesInterVMFS.py targetvm "`pwd`/mnt" 1
+	python3 -u usr/bin/QubesInterVMFS targetvm "`pwd`/mnt" 1
 	fusermount -u mnt
 
 dbg:
