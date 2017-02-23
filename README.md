@@ -6,7 +6,7 @@ Current situation is that you just can copy or move a single file from one VM
 to another.  If you need access to a whole bunch of files you are lost (or
 create a tgz first). Sometimes you don't even want to copy the content. I was
 always missing a solution to export a directory tree read only to another VM.
-This project solves exactly that.
+This project tries to solve exactly that.
 
 This is a proof on concept and not considered as stable, final, mature, secure
 or whatever as a tool for qubes is expected and should be! Try it on your own
@@ -66,7 +66,7 @@ Debugging
 
 The two parts are communicating via qrexec-client-vm (see
 https://www.qubes-os.org/doc/qrexec2/) but can run standalone (directly using
-stdin/out) for debugging purpose. if you add a non-zero second parameter it
+stdin/out) for debugging purpose. If you add a non-zero second parameter it
 will switch on debugging and run locally.
 
 Todos
