@@ -19,13 +19,13 @@ The following files are required in the given places:
 
 dom0:
 
-	etc/qubes-rpc/qubes.QubesInterVMFS
+	etc/qubes-rpc/policy/qubes.QubesInterVMFS
 
 srcvm:
 
 	usr/bin/QubesInterVMFS
 
-	dependency: python3, python3-llfuser
+	dependencies: python3, python3-llfuser
 
 destvm:
 
@@ -53,7 +53,13 @@ Bugs
 
 In case QubesInterVMFS crashes or was killed it may happen that the mountpoint
 is still mounted. You will get errors like "Transport endpoint is not
-connected". A `fusermount -u <mountpoint>` will solve this problem.
+connected". A
+
+```
+fusermount -u <mountpoint>
+```
+
+will solve this problem.
 
 Debugging
 ---------
