@@ -25,7 +25,7 @@ srcvm:
 
 	usr/bin/QubesInterVMFS
 
-	dependency: python3, python3-llfuser 1.2+dfsg-1
+	dependency: python3, python3-llfuser
 
 destvm:
 
