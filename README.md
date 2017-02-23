@@ -48,6 +48,13 @@ directory name as second argument.
 The home directory of the destvm should be readonly accessible in the given
 directory in the srcvm.
 
+Bugs
+----
+
+In case QubesInterVMFS crashes or was killed it may happen that the mountpoint
+is still mounted. You will get errors like "Transport endpoint is not
+connected". A `fusermount -u <mountpoint>` will solve this problem.
+
 Debugging
 ---------
 
