@@ -87,3 +87,14 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+control
+control.tar.gz
+data.tar.gz
+debian-binary
+postinst
+postrm
+preinst
+prerm
+qubes-intervmfs_0.0_all.deb
+
